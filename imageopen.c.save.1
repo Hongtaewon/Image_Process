@@ -1,0 +1,66 @@
+#include <gtk/gtk.h>
+
+/* 콘솔에 파일 이름과 경로를 찍어줌 */
+static void file_ok_sel( GtkWidget        *w,
+                         GtkFileSelection *fs )
+{
+    g_print ("%s\n", gtk_file_selection_get_filename (GTK_FILE_SELECTION (fs)));
+}
+
+static void fileopen()
+{
+	/* Create a new file selection widget */
+    filew = gtk_file_selection_new ("File selection");
+    
+    g_signal_connect (filew, "destroy",
+                      G_CALLBACK (gtk_main_quit), NULL);
+    /* Connect the ok_button to file_ok_sel function */
+    g_signal_connect (GTK_FILE_SELECTION (filew)->ok_button,
+                      "clicked", G_CALLBACK (file_ok_sel), (gpointer) filew);
+    
+    /* Connect the cancel_button to destroy the widget */
+    g_signal_connect_swapped (GTK_FILE_SELECTION (filew)->cancel_button,
+                              "clicked", G_CALLBACK (gtk_widget_destroy),
+                              filew);
+    
+    /* Lets set the filename, as if this were a save dialog, and we are giving
+     a default filename */
+    gtk_file_selection_set_filename (GTK_FILE_SELECTION(filew), 
+                                     "penguin.png");
+    
+    gtk_widget_show (filew);
+
+}
+//버튼 함수
+static void pack_button (GtkWidget* hbox,const char* label,GCallback func)
+        {
+                        GtkWidget* button = gtk_button_new_with_label(label);
+                        gtk_widget_set_size_request (button,BTN_WIDTH,BTN_HEIGH$
+                        gtk_container_add (GTK_CONTAINER(hbox),button);
+                        gtk_signal_connect (GTK_OBJECT (button), "clicked",G_CA$
+        }
+
+int main(int argc, char *argv[]) {
+
+  GtkWidget *window;
+  GtkWidget *image;
+  GtkWidget *filew;
+  GtkWidget *box, *hbox;
+  GtkWidget *button1,*button2,*button3;
+
+  gtk_init(&argc, &argv);
+
+  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  g_signal_connect (G_OBJECT(window),"destroy",G_CALLBACK(gtk_main_quit),NULL);
+  gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
+  gtk_window_set_title(GTK_WINDOW(window), "Red Rock");
+
+  image = gtk_image_new_from_file("image.jpg");
+
+  gtk_container_add(GTK_CONTAINER(window), image);
+
+  g_signal_connect(G_OBJECT(window), "destroy",
+        G_CALLBACK(gtk_main_quit), NULL);
+
+  gtk_widget_show_all(window);
+
