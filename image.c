@@ -20,39 +20,44 @@ static void evening()
 static void pack_button (GtkWidget* hbox,const char* label,GCallback func)
         {
                         GtkWidget* button = gtk_button_new_with_label(label);
-                        gtk_widget_set_size_request (button,BTN_WIDTH,BTN_HEIGH$
+                        gtk_widget_set_size_request (button,BTN_WIDTH,BTN_HEIGHT);
                         gtk_container_add (GTK_CONTAINER(hbox),button);
-                        gtk_signal_connect (GTK_OBJECT (button), "clicked",G_CA$
+                        gtk_signal_connect (GTK_OBJECT (button), "clicked",G_CALLBACK(func),NULL);
         }
+
 
 int main(int argc, char *argv[]) {
 
-  GtkWidget *window,*hbox,*box;
-  GtkWidget *image;
-  GtkWidget *buttion1,*button2,*button3;
+  GtkWidget *window,*window1,*hbox;
+  GtkWidget *image,*frame;
+  GtkWidget *button1,*button2,*button3;
+
+
+  //초기화 설정
   gtk_init(&argc, &argv);
+  
+  //대화상자 설정
+  window1 = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
-  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-  box = gtk_box_new(GTK_ORIENTATION_VERTICAL,5);
+  gtk_window_set_title(GTK_WINDOW(window1), "Red Rock");
 
-  gtk_window_set_position(GTK_WINDOW(window), GTK_WIN_POS_CENTER);
-  gtk_window_set_title(GTK_WINDOW(window), "Red Rock");
-
-  image = gtk_image_new_from_file("/home/hong/EmbeddedSW/Image_Process/image.jpg");
+  image = gtk_image_new_from_file("image.jpg");
 
 
-  g_signal_connect(G_OBJECT(window), "destroy",
+  g_signal_connect(G_OBJECT(window1), "destroy",
         G_CALLBACK(gtk_main_quit), NULL);
 
-	//버튼 작성과 패킹
-        hbox = gtk_hbox_new (TRUE,0);
-        pack_button (hbox,"1",morning);
-        pack_button (hbox,"2",afternoon);
-        pack_button (hbox,"3",evening);
+  //버튼 작성과 패킹
+                hbox = gtk_hbox_new (TRUE,0);
+                pack_button (hbox,"1",morning);
+                pack_button (hbox,"2",afternoon);
+                pack_button (hbox,"3",evening);
+  //프레임 생성
+  gtk_container_add(GTK_CONTAINER(hbox),image);
+  gtk_container_add(GTK_CONTAINER(window1), hbox);
 
-  gtk_container_add(GTK_CONTAINER(window), image);
-  gtk_container_add(GTK_CONTAINER(window), hbox);
-  gtk_widget_show_all(window);
+
+  gtk_widget_show_all(window1);
 
   gtk_main();
 
