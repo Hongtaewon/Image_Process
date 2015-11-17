@@ -1,10 +1,21 @@
 #include <gtk/gtk.h>
+#include <glib.h>
 #define BTN_WIDTH 200
 #define BTN_HEIGHT 50
+
+  gchar *filename = "image.jpg";
+  GtkWidget *frame,*image,*image1;
+  GtkWidget *window,*window1,*hbox;
+  GtkWidget *table;
+  GtkWidget *button1,*button2,*button3;
 
 static void morning()
 {
         printf ("Good morning\n");
+	filename = "image1.jpg";
+	//프레임 생성
+	gtk_widget_hide(image);
+	gtk_widget_show(image1);
 }
 
 static void afternoon()
@@ -28,11 +39,6 @@ static void pack_button (GtkWidget* hbox,const char* label,GCallback func)
 
 int main(int argc, char *argv[]) {
 
-  GtkWidget *window,*window1,*hbox;
-  GtkWidget *image,*frame;
-  GtkWidget *button1,*button2,*button3;
-  GtkWidget *table;
-
   //초기화 설정
   gtk_init(&argc, &argv);
 
@@ -42,8 +48,8 @@ int main(int argc, char *argv[]) {
   //테이블 생성
   table = gtk_table_new(2,3,TRUE);
 
-
-  image = gtk_image_new_from_file("image.jpg");
+  image = gtk_image_new_from_file(filename);
+  image1 = gtk_image_new_from_file("image1.jpg");
 
 
   g_signal_connect(G_OBJECT(window1), "destroy",
@@ -56,6 +62,7 @@ int main(int argc, char *argv[]) {
                 pack_button (hbox,"3",evening);
 
   gtk_table_attach_defaults(GTK_TABLE(table),image,0,2,0,3);
+  gtk_table_attach_defaults(GTK_TABLE(table),image1,0,2,0,3);
   gtk_table_attach_defaults(GTK_TABLE(table),hbox,2,3,0,1);
 
   //프레임 생성
@@ -64,6 +71,7 @@ int main(int argc, char *argv[]) {
 
 
   gtk_widget_show_all(window1);
+  gtk_widget_hide(image1);
 
   gtk_main();
 
