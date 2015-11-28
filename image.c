@@ -4,18 +4,28 @@
 #define BTN_HEIGHT 50
 
   gchar *filename = "image.jpg";
-  GtkWidget *frame,*image,*image1;
-  GtkWidget *window,*window1,*hbox;
+  GtkWidget *frame,*image;
+  GtkWidget *window,*hbox,*vbox;
   GtkWidget *table;
   GtkWidget *button1,*button2,*button3;
 
-static void morning()
+static void morning(GtkButton *button,
+		GtkImage *image)
 {
+	static gboolean state = TRUE;
         printf ("Good morning\n");
-	filename = "image1.jpg";
-	//프레임 생성
-	gtk_widget_hide(image);
-	gtk_widget_show(image1);
+
+	if( state )
+	{
+		filename = "image1.jpg";
+		gtk_image_set_from_file( image, filename );
+	}
+	else
+	{
+		filename = "image.jpg";
+		gtk_image_set_from_file( image, filename );
+	}
+	state = !state;
 }
 
 static void afternoon()
@@ -28,50 +38,45 @@ static void evening()
         printf ("Good evening\n");
 }
 
-static void pack_button (GtkWidget* hbox,const char* label,GCallback func)
-        {
-                        GtkWidget* button = gtk_button_new_with_label(label);
-                        gtk_widget_set_size_request (button,BTN_WIDTH,BTN_HEIGHT);
-                        gtk_container_add (GTK_CONTAINER(hbox),button);
-                        gtk_signal_connect (GTK_OBJECT (button), "clicked",G_CALLBACK(func),NULL);
-        }
 
 
 int main(int argc, char *argv[]) {
+
+  GtkWidget *frame,*image;
+  GtkWidget *window,*hbox,*vbox;
+  GtkWidget *table;
+  GtkWidget *button1,*button2,*button3;
+
 
   //초기화 설정
   gtk_init(&argc, &argv);
 
   //대화상자 설정
-  window1 = gtk_window_new(GTK_WINDOW_TOPLEVEL);
-  gtk_window_set_title(GTK_WINDOW(window1), "Red Rock");
+  window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+  gtk_window_set_title(GTK_WINDOW(window), "Image Process");
   //테이블 생성
   table = gtk_table_new(2,3,TRUE);
 
   image = gtk_image_new_from_file(filename);
-  image1 = gtk_image_new_from_file("image1.jpg");
 
-
-  g_signal_connect(G_OBJECT(window1), "destroy",
+  g_signal_connect(G_OBJECT(window), "destroy",
         G_CALLBACK(gtk_main_quit), NULL);
+  vbox = gtk_vbox_new(FALSE,6);
+  gtk_box_pack_start(GTK_BOX(vbox),image,FALSE,FALSE,0);
+
+  button1 = gtk_button_new_with_label("Swap");
+  g_signal_connect(G_OBJECT(button1),"clicked",
+		G_CALLBACK(morning),GTK_IMAGE(image) );
 
   //버튼 작성과 패킹
-                hbox = gtk_hbox_new (TRUE,0);
-                pack_button (hbox,"1",morning);
-                pack_button (hbox,"2",afternoon);
-                pack_button (hbox,"3",evening);
-
-  gtk_table_attach_defaults(GTK_TABLE(table),image,0,2,0,3);
-  gtk_table_attach_defaults(GTK_TABLE(table),image1,0,2,0,3);
-  gtk_table_attach_defaults(GTK_TABLE(table),hbox,2,3,0,1);
+  gtk_table_attach_defaults(GTK_TABLE(table),vbox,0,2,0,3);
+  gtk_table_attach_defaults(GTK_TABLE(table),button1,2,3,0,1);
 
   //프레임 생성
-  //gtk_container_add(GTK_CONTAINER(hbox),image);
-  gtk_container_add(GTK_CONTAINER(window1), table);
+  gtk_container_add(GTK_CONTAINER(window), table);
 
 
-  gtk_widget_show_all(window1);
-  gtk_widget_hide(image1);
+  gtk_widget_show_all(window);
 
   gtk_main();
 
