@@ -1,1 +1,1 @@
-gcc test.c -o test `pkg-config --cflags --libs gtk+-2.0`
+gcc image.c -o image `pkg-config --cflags --libs gtk+-2.0`
