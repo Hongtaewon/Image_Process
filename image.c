@@ -69,7 +69,6 @@ int main(int argc, char *argv[]) {
   g_signal_connect(G_OBJECT(button1),"clicked",
 		G_CALLBACK(morning),GTK_IMAGE(image));
 
-  gtk_container_add (GTK_CONTAINER (frame), image);
 
 
   //버튼 작성과 패킹
@@ -77,8 +76,7 @@ int main(int argc, char *argv[]) {
   gtk_table_attach_defaults(GTK_TABLE(table),vbox,1,2,0,2);
 
   //프레임 생성
-  gtk_container_add(GTK_CONTAINER(window),frame);
-//  gtk_container_add(GTK_CONTAINER(window), table);
+  gtk_container_add(GTK_CONTAINER(window), table);
 
   gtk_widget_show_all(window);
 
