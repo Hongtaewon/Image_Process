@@ -69,22 +69,15 @@ int main(int argc, char *argv[]) {
   button1 = gtk_button_new_with_label("Swap");
   button2 = gtk_button_new_with_label("gray");
   g_signal_connect(G_OBJECT(button1),"clicked",
-<<<<<<< HEAD
 		G_CALLBACK(swap),GTK_IMAGE(image));
   g_signal_connect(G_OBJECT(button2),"clicked",
                 G_CALLBACK(gray),GTK_IMAGE(image));
-=======
-		G_CALLBACK(morning),GTK_IMAGE(image));
 
->>>>>>> 195309513d1f2fdfd4893035f175b5af7554d028
 
 
   //버튼 작성과 패킹
   gtk_table_attach_defaults(GTK_TABLE(table),button1,0,1,0,1);
-<<<<<<< HEAD
   gtk_table_attach_defaults(GTK_TABLE(table),button2,0,1,1,2);
-=======
->>>>>>> 195309513d1f2fdfd4893035f175b5af7554d028
   gtk_table_attach_defaults(GTK_TABLE(table),vbox,1,2,0,2);
 
   //프레임 생성
