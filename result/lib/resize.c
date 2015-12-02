@@ -1,9 +1,9 @@
 #include <wand/magick_wand.h>
 #include <stdlib.h>
 
-void main(int argc,char *argv[])
+void resize(char* input[],char* output[])
 {
-	printf("%s\n%s\n",argv[1],argv[2]);
+	printf("%s\n%s\n",input[],output[]);
 	MagickWand *m_wand = NULL;
 
 	int width,height;
@@ -13,7 +13,7 @@ void main(int argc,char *argv[])
 	m_wand = NewMagickWand();
 	// Read the image - all you need to do is change "logo:" to some other
 	// filename to have this resize and, if necessary, convert a different file
-	MagickReadImage(m_wand,argv[1]);
+	MagickReadImage(m_wand,input[]);
 
 	// Get the image's width and height
 	width = MagickGetImageWidth(m_wand);
@@ -33,7 +33,7 @@ void main(int argc,char *argv[])
 	MagickSetImageCompressionQuality(m_wand,95);
 
 	/* Write the new image */
-	MagickWriteImage(m_wand,argv[2]);
+	MagickWriteImage(m_wand,output[]);
 
 	/* Clean up */
 	if(m_wand)m_wand = DestroyMagickWand(m_wand);
