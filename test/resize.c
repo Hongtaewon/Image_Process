@@ -29,8 +29,13 @@ void main(int argc,char *argv[])
 	// on the command line so I have set it to its default of one.
 	MagickResizeImage(m_wand,width,height,LanczosFilter,1);
 
+	//gray
+	MagickSetImageColorspace(m_wand,GRAYColorspace);
+
 	// Set the compression quality to 95 (high quality = low compression)
 	MagickSetImageCompressionQuality(m_wand,95);
+
+
 
 	/* Write the new image */
 	MagickWriteImage(m_wand,argv[2]);

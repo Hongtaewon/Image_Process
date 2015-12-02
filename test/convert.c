@@ -11,7 +11,9 @@ void main(void)
 	/* Read the input image */
 	MagickReadImage(mw,"logo:");
 	/* write it */
-	MagickWriteImage(mw,"logo.jpg");
+	MagickSetImageColorspace(mw,GRAYColorspace);
+
+	MagickWriteImage(mw,"gray.jpg");
 
 	/* Tidy up */
 	if(mw) mw = DestroyMagickWand(mw);

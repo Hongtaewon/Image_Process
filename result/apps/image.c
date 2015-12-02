@@ -31,9 +31,12 @@ static void halfsize(GtkButton *button,
 	gtk_image_set_from_file(image,filename);
 }
 
-static void evening()
+static void grayscale(GtkButton *button,
+                GtkImage *image)
 {
-        printf ("Good evening\n");
+	gray(filename,"gray.jpg");
+	filename = "gray.jpg";
+	gtk_image_set_from_file(image,filename);
 }
 
 
@@ -69,17 +72,20 @@ int main(int argc, char *argv[]) {
 
   button1 = gtk_button_new_with_label("Swap");
   button2 = gtk_button_new_with_label("half-resize");
+  button3 = gtk_button_new_with_label("grayscale");
 
   g_signal_connect(G_OBJECT(button1),"clicked",
 		G_CALLBACK(swap),GTK_IMAGE(image));
   g_signal_connect(G_OBJECT(button2),"clicked",
                 G_CALLBACK(halfsize),GTK_IMAGE(image));
-
+  g_signal_connect(G_OBJECT(button3),"clicked",
+		G_CALLBACK(grayscale),GTK_IMAGE(image));
 
 
   //버튼 작성과 패킹
   gtk_table_attach_defaults(GTK_TABLE(table),button1,0,1,0,1);
   gtk_table_attach_defaults(GTK_TABLE(table),button2,0,1,1,2);
+  gtk_table_attach_defaults(GTK_TABLE(table),button3,0,1,2,3);
   gtk_table_attach_defaults(GTK_TABLE(table),vbox,1,2,0,2);
 
   //프레임 생성
