@@ -10,7 +10,7 @@ $(OUTPUT) : $(OBJFILES)
 	$(AR) rv $(OUTPUT) $(OBJFILES)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ `pkg-config --cflags --libs MagickWand`
+	$(CC) $(CFLAGS) -c $< -o $@ `pkg-config --cflags --libs gtk+-2.0` `pkg-config --cflags --libs MagickWand`
 
 clean:
 	rm -f $(OBJFILES) $(OUTPUT)

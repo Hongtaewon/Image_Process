@@ -23,10 +23,12 @@ static void swap(GtkButton *button,
 	state = !state;
 }
 
-static void gray(GtkButton *button,
+static void halfsize(GtkButton *button,
 		GtkImage *image)
 {
         resize(filename,"resize.jpg");
+	filename = "resize.jpg";
+	gtk_image_set_from_file(image,filename);
 }
 
 static void evening()
@@ -66,12 +68,12 @@ int main(int argc, char *argv[]) {
   gtk_box_pack_start(GTK_BOX(vbox),image,FALSE,FALSE,0);
 
   button1 = gtk_button_new_with_label("Swap");
-  button2 = gtk_button_new_with_label("gray");
+  button2 = gtk_button_new_with_label("half-resize");
 
   g_signal_connect(G_OBJECT(button1),"clicked",
 		G_CALLBACK(swap),GTK_IMAGE(image));
   g_signal_connect(G_OBJECT(button2),"clicked",
-                G_CALLBACK(gray),GTK_IMAGE(image));
+                G_CALLBACK(halfsize),GTK_IMAGE(image));
 
 
 

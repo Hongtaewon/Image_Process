@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -g -Wall -I../include
+CFLAGS = -g -W -I../include
 OUTPUT = main
 
 $(OUTPUT): image.o
