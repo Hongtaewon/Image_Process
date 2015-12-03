@@ -3,7 +3,7 @@
 
 void gray(char* input,char* output)
 {
-        printf("%s\n%s\n",input,output);
+        printf("gray\n");
         MagickWand *m_wand = NULL;
 
 

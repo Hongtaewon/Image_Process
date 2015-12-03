@@ -3,7 +3,7 @@
 
 void blur(char* input,char* output)
 {
-        printf("%s\n%s\n",input,output);
+        printf("blur\n");
         MagickWand *m_wand = NULL;
 
 

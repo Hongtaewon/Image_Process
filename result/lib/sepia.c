@@ -3,7 +3,7 @@
 
 void sepia(char* input,char* output)
 {
-        printf("%s\n%s\n",input,output);
+        printf("sepia\n");
         MagickWand *m_wand = NULL;
 
 

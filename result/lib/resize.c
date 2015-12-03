@@ -3,7 +3,7 @@
 
 void resize(char* input,char* output)
 {
-	printf("%s\n%s\n",input,output);
+	printf("half-size\n");
 	MagickWand *m_wand = NULL;
 
 	int width,height;
