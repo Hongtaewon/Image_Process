@@ -2,7 +2,7 @@
 #include <glib.h>
 #include <resize.h>
 
-  gchar *filename;
+  gchar *filename=NULL;
 
 static void swap(GtkButton *button,
 		GtkImage *image)
@@ -34,45 +34,52 @@ static void halfsize(GtkButton *button,
 static void grayscale(GtkButton *button,
                 GtkImage *image)
 {
+	//blur(filename,"blur.jpg");
 	gray(filename,"gray.jpg");
 	filename = "gray.jpg";
 	gtk_image_set_from_file(image,filename);
 }
 
-
+static void Blur(GtkButton *button,
+                GtkImage *image)
+{
+        blur(filename,"blur.jpg");
+        //gray(filename,"gray.jpg");
+        filename = "blur.jpg";
+        gtk_image_set_from_file(image,filename);
+}
 
 int main(int argc, char *argv[]) {
 
-  GtkWidget *frame,*image;
+  GtkWidget *image;
   GtkWidget *window,*hbox,*vbox;
   GtkWidget *table;
-  GtkWidget *button1,*button2,*button3;
+  GtkWidget *button1,*button2,*button3,*button4;
   gint i;
 
   //초기화 설정
   gtk_init(&argc, &argv);
-
+  //파일이름 저장
   filename = argv[1];
-
   //대화상자 설정
   window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
   gtk_window_set_title(GTK_WINDOW(window), "Image Process");
 
   gtk_container_border_width (GTK_CONTAINER (window), 10);
   //테이블 생성
-  table = gtk_table_new(2,3,FALSE);
+  table = gtk_table_new(3,4,FALSE);
 
-  frame = gtk_frame_new(NULL);
   image = gtk_image_new_from_file(filename);
 
   g_signal_connect(G_OBJECT(window), "destroy",
         G_CALLBACK(gtk_main_quit), NULL);
-  vbox = gtk_vbox_new(FALSE,4);
-  gtk_box_pack_start(GTK_BOX(vbox),image,FALSE,FALSE,0);
+  //vbox = gtk_vbox_new(FALSE,4);
+  //gtk_box_pack_start(GTK_BOX(vbox),image,FALSE,FALSE,0);
 
   button1 = gtk_button_new_with_label("Swap");
   button2 = gtk_button_new_with_label("half-resize");
   button3 = gtk_button_new_with_label("grayscale");
+  button4 = gtk_button_new_with_label("blur");
 
   g_signal_connect(G_OBJECT(button1),"clicked",
 		G_CALLBACK(swap),GTK_IMAGE(image));
@@ -80,13 +87,15 @@ int main(int argc, char *argv[]) {
                 G_CALLBACK(halfsize),GTK_IMAGE(image));
   g_signal_connect(G_OBJECT(button3),"clicked",
 		G_CALLBACK(grayscale),GTK_IMAGE(image));
-
+  g_signal_connect(G_OBJECT(button4),"clicked",
+		G_CALLBACK(Blur),GTK_IMAGE(image));
 
   //버튼 작성과 패킹
   gtk_table_attach_defaults(GTK_TABLE(table),button1,0,1,0,1);
   gtk_table_attach_defaults(GTK_TABLE(table),button2,0,1,1,2);
   gtk_table_attach_defaults(GTK_TABLE(table),button3,0,1,2,3);
-  gtk_table_attach_defaults(GTK_TABLE(table),vbox,1,2,0,2);
+  gtk_table_attach_defaults(GTK_TABLE(table),button4,0,1,3,4);
+  gtk_table_attach_defaults(GTK_TABLE(table),image,1,3,0,3);
 
   //프레임 생성
   gtk_container_add(GTK_CONTAINER(window), table);

@@ -2,8 +2,8 @@ AR = ar
 CC = gcc
 CFLAGS = -g -Wall -I../include
 OUTPUT = libfuncs.a
-SRCS = resize.c gray.c
-OBJFILES = resize.o gray.o
+SRCS = resize.c gray.c blur.c
+OBJFILES = resize.o gray.o blur.o
 .PHONY : clean
 
 $(OUTPUT) : $(OBJFILES)
