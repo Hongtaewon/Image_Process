@@ -14,7 +14,7 @@ void main(int argc,char* argv[])
         //open
         MagickReadImage(m_wand,argv[1]);
         //blur
-	MagickGaussianBlurImage(m_wand,1,0x2);
+	MagickGaussianBlurImage(m_wand,0x4,0x8);
         //MagickBlurImage(m_wand,5,3);
 
         //save

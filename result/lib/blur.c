@@ -13,7 +13,7 @@ void blur(char* input,char* output)
         //open
         MagickReadImage(m_wand,input);
 	//blur
-	MagickGaussianBlurImage(m_wand,5,0x8);
+	MagickGaussianBlurImage(m_wand,0x4,0x8);
 	//MagickBlurImage(m_wand,5,3);
         //save
         MagickWriteImage(m_wand,output);
