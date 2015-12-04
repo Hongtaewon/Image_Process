@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -g -W -I../include
-OUTPUT = image_process
+OUTPUT = Image_Process
 
 $(OUTPUT): image.o
 	$(CC) -o $(OUTPUT) $(CFLAGS) -L../lib image.o -lfuncs `pkg-config --cflags --libs gtk+-2.0` `pkg-config --cflags --libs MagickWand`
