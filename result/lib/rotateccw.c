@@ -1,19 +1,20 @@
 #include <wand/magick_wand.h>
 #include <stdlib.h>
 
-void bright(char* input,char* output)
+void rotateccw(char* input,char* output)
 {
-        printf("bright\n");
+        printf("counterclockwise 90\n");
         MagickWand *m_wand = NULL;
-
+	PixelWand * backpixel;
 
         MagickWandGenesis();
-
+	backpixel = NewPixelWand();
+	PixelSetColor(backpixel,"#000000");
         m_wand = NewMagickWand();
         //open
         MagickReadImage(m_wand,input);
-        //brightness
-	MagickGammaImage(m_wand,2);
+        //rotate
+	MagickRotateImage(m_wand,backpixel,270);
         //save
         MagickWriteImage(m_wand,output);
 
@@ -22,4 +23,3 @@ void bright(char* input,char* output)
 
         MagickWandTerminus();
 }
-
