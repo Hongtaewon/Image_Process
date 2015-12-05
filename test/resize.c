@@ -20,17 +20,17 @@ void main(int argc,char *argv[])
 	height = MagickGetImageHeight(m_wand);
 
 	// Cut them in half but make sure they don't underflow
-	if((width /= 2) < 1)width = 1;
-	if((height /= 2) < 1)height = 1;
+	if((width *= 2) < 1)width = 1;
+	if((height *= 2) < 1)height = 1;
 
 	// Resize the image using the Lanczos filter
 	// The blur factor is a "double", where > 1 is blurry, < 1 is sharp
 	// I haven't figured out how you would change the blur parameter of MagickResizeImage
 	// on the command line so I have set it to its default of one.
-	MagickResizeImage(m_wand,width,height,LanczosFilter,1);
+	MagickResizeImage(m_wand,width,height,LanczosFilter,0.1);
 
 	//gray
-	MagickSetImageColorspace(m_wand,GRAYColorspace);
+//	MagickSetImageColorspace(m_wand,GRAYColorspace);
 
 	// Set the compression quality to 95 (high quality = low compression)
 	MagickSetImageCompressionQuality(m_wand,95);

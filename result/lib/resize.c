@@ -30,7 +30,7 @@ void resize(char* input,char* output)
 	MagickResizeImage(m_wand,width,height,LanczosFilter,1);
 
 	// Set the compression quality to 95 (high quality = low compression)
-	MagickSetImageCompressionQuality(m_wand,95);
+	//MagickSetImageCompressionQuality(m_wand,95);
 
 	/* Write the new image */
 	MagickWriteImage(m_wand,output);

@@ -1,19 +1,20 @@
 #include <wand/magick_wand.h>
 #include <stdlib.h>
 
-void blur(char* input,char* output)
+void rotatecw(char* input,char* output)
 {
-        printf("blur\n");
+        printf("clockwise 90\n");
         MagickWand *m_wand = NULL;
-
+	PixelWand * backpixel;
 
         MagickWandGenesis();
-
+	backpixel = NewPixelWand();
+	PixelSetColor(backpixel,"#000000");
         m_wand = NewMagickWand();
         //open
         MagickReadImage(m_wand,input);
-	//blur
-	MagickBlurImage(m_wand,0,3);
+        //rotate
+	MagickRotateImage(m_wand,backpixel,90);
         //save
         MagickWriteImage(m_wand,output);
 

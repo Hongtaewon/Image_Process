@@ -3,7 +3,7 @@
 
 void bright(char* input,char* output)
 {
-        printf("gamma 3\n");
+        printf("bright\n");
         MagickWand *m_wand = NULL;
 
 
@@ -13,7 +13,7 @@ void bright(char* input,char* output)
         //open
         MagickReadImage(m_wand,input);
         //brightness
-	MagickGammaImage(m_wand,3);
+	MagickGammaImage(m_wand,2);
         //save
         MagickWriteImage(m_wand,output);
 

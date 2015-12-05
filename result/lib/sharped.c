@@ -1,9 +1,9 @@
 #include <wand/magick_wand.h>
 #include <stdlib.h>
 
-void blur(char* input,char* output)
+void sharp(char* input,char* output)
 {
-        printf("blur\n");
+        printf("sharped\n");
         MagickWand *m_wand = NULL;
 
 
@@ -12,9 +12,9 @@ void blur(char* input,char* output)
         m_wand = NewMagickWand();
         //open
         MagickReadImage(m_wand,input);
-	//blur
-	MagickBlurImage(m_wand,0,3);
-        //save
+        //sharpe
+	MagickSharpenImage(m_wand,5,5);
+	//save
         MagickWriteImage(m_wand,output);
 
         /* Clean up */
@@ -22,3 +22,4 @@ void blur(char* input,char* output)
 
         MagickWandTerminus();
 }
+
