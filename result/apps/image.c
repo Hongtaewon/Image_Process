@@ -74,6 +74,25 @@ static void ccw90(GtkButton *button,
         gtk_image_set_from_file(image,filename);
 }
 
+static void Flip(GtkButton *button,
+                GtkImage *image)
+{
+        gchar* save = "images/x-mirror.jpg";
+        flip(filename,save);
+        filename = save;
+        gtk_image_set_from_file(image,filename);
+}
+
+static void Flop(GtkButton *button,
+                GtkImage *image)
+{
+        gchar* save = "images/y-mirror.jpg";
+        flop(filename,save);
+        filename = save;
+        gtk_image_set_from_file(image,filename);
+}
+
+
 static void negative(GtkButton *button,
                 GtkImage *image)
 {
@@ -92,6 +111,23 @@ static void Sharp(GtkButton *button,
         gtk_image_set_from_file(image,filename);
 }
 
+static void Poster(GtkButton *button,
+                GtkImage *image)
+{
+        gchar* save = "images/Poster.jpg";
+        poster(filename,save);
+        filename = save;
+        gtk_image_set_from_file(image,filename);
+}
+
+static void Sketch(GtkButton *button,
+                GtkImage *image)
+{
+        gchar* save = "images/sketch.jpg";
+        sketch(filename,save);
+        filename = save;
+        gtk_image_set_from_file(image,filename);
+}
 
 static void Save(GtkButton *button,
                 GtkImage *image)
@@ -106,7 +142,7 @@ int main(int argc, char *argv[]) {
   GtkWidget *window;
   GtkWidget *table,hbox;
   GtkWidget *button1,*button2,*button3,*button4,*button5,*button6,*button7,*button8,*button9,*button10;
-  GtkWidget *button11,*button12;
+  GtkWidget *button11,*button12,*button13,*button14,*button15;
 
   //초기화 설정
   gtk_init(&argc, &argv);
@@ -136,7 +172,11 @@ int main(int argc, char *argv[]) {
   button9 = gtk_button_new_with_label("rotate cw90");
   button10 = gtk_button_new_with_label("negative");
   button11 = gtk_button_new_with_label("sharp");
-  button12 = gtk_button_new_with_label("unknown");
+  button12 = gtk_button_new_with_label("poster");
+  button13 = gtk_button_new_with_label("sketch");
+  button14 = gtk_button_new_with_label("x-axis mirror");
+  button15 = gtk_button_new_with_label("y-axis mirror");
+
   //버튼 이벤트 연결
   g_signal_connect(G_OBJECT(button1),"clicked",
 		G_CALLBACK(original),GTK_IMAGE(image));
@@ -160,8 +200,15 @@ int main(int argc, char *argv[]) {
                 G_CALLBACK(negative),GTK_IMAGE(image));
   g_signal_connect(G_OBJECT(button11),"clicked",
                 G_CALLBACK(Sharp),GTK_IMAGE(image));
-
-  gtk_widget_set_size_request(image,800,800);
+  g_signal_connect(G_OBJECT(button12),"clicked",
+                G_CALLBACK(Poster),GTK_IMAGE(image));
+  g_signal_connect(G_OBJECT(button13),"clicked",
+                G_CALLBACK(Sketch),GTK_IMAGE(image));
+  g_signal_connect(G_OBJECT(button14),"clicked",
+                G_CALLBACK(Flip),GTK_IMAGE(image));
+  g_signal_connect(G_OBJECT(button15),"clicked",
+                G_CALLBACK(Flop),GTK_IMAGE(image));
+  gtk_widget_set_size_request(image,600,500);
   //테이블에 위젯 추가
   gtk_table_attach_defaults(GTK_TABLE(table),button1,0,1,0,1);
   gtk_table_attach_defaults(GTK_TABLE(table),button2,0,1,1,2);
@@ -175,6 +222,9 @@ int main(int argc, char *argv[]) {
   gtk_table_attach_defaults(GTK_TABLE(table),button10,6,7,0,1);
   gtk_table_attach_defaults(GTK_TABLE(table),button11,6,7,1,2);
   gtk_table_attach_defaults(GTK_TABLE(table),button12,6,7,2,3);
+  gtk_table_attach_defaults(GTK_TABLE(table),button13,6,7,3,4);
+  gtk_table_attach_defaults(GTK_TABLE(table),button14,4,5,6,7);
+  gtk_table_attach_defaults(GTK_TABLE(table),button15,5,6,6,7);
   gtk_table_attach_defaults(GTK_TABLE(table),image,1,6,0,6);
 
   //윈도우에 테이블 추가

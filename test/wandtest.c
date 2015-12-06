@@ -3,28 +3,26 @@ void main()
 {
 	MagickWand *mw = NULL;
 	PixelWand *background;
-<<<<<<< HEAD
-	DrawingWand *dw = NULL;
-	PixelWand *pw = NULL;
-=======
->>>>>>> 2dea73d1feaf20feb5b678a660a180acf2c8fad0
 	MagickWandGenesis();
 
 	/* Create a wand */
 	mw = NewMagickWand();
-<<<<<<< HEAD
-	dw = NewDrawingWand();
-	pw = NewPixelWand();
-=======
->>>>>>> 2dea73d1feaf20feb5b678a660a180acf2c8fad0
 	background = NewPixelWand();
 	PixelSetColor(background,"#ffffff");
 	/* Read the input image */
 	MagickReadImage(mw,"dog.png");
 	/* write it */
-<<<<<<< HEAD
-	MagickSharpenImage(mw,5,5);
-	//MagickShadowImage(mw,0,1,1,1);
+	MagickFlopImage(mw);
+	//MagickFlipImage(mw);
+	//MagickSpliceImage(mw,3,3,1,1);
+	//MagickOilPaintImage(mw,3);
+	///MagickPosterizeImage(mw,12,1);
+	//MagickEmbossImage(mw,1,0);
+	///MagickSketchImage(mw,0,2,30);
+	//MagickSmushImages(mw,1,3);
+	//MagickSpreadImage(mw,5);
+	//MagickSharpenImage(mw,5,5);
+	//MagickShadowImage(mw,0.5,1,0,0);
 	//MagickAnnotateImage(mw,dw,0,0,0,"Gel");
 	//MagickTrimImage(mw,100);
 	//MagickNegateImage(mw,MagickFalse);
@@ -36,10 +34,6 @@ void main()
 	//MagickSetImageAlphaChannel(mw,DeactivateAlphaChannel);
 	//MagickRotateImage(mw,background,90);
 	MagickWriteImage(mw,"qq.jpg");
-=======
-	MagickRotateImage(mw,background,90);
-	MagickWriteImage(mw,"sepia.jpg");
->>>>>>> 2dea73d1feaf20feb5b678a660a180acf2c8fad0
 
 	/* Tidy up */
 	if(mw) mw = DestroyMagickWand(mw);
