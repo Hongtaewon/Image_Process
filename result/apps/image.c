@@ -129,6 +129,33 @@ static void Sketch(GtkButton *button,
         gtk_image_set_from_file(image,filename);
 }
 
+static void Polar(GtkButton *button,
+                GtkImage *image)
+{
+        gchar* save = "images/Polar.jpg";
+        polaroid(filename,save);
+        filename = save;
+        gtk_image_set_from_file(image,filename);
+}
+
+static void Swirl(GtkButton *button,
+                GtkImage *image)
+{
+        gchar* save = "images/Swirl.jpg";
+        swirl(filename,save);
+        filename = save;
+        gtk_image_set_from_file(image,filename);
+}
+
+static void Wave(GtkButton *button,
+                GtkImage *image)
+{
+        gchar* save = "images/Wave.jpg";
+        wave(filename,save);
+        filename = save;
+        gtk_image_set_from_file(image,filename);
+}
+
 static void Save(GtkButton *button,
                 GtkImage *image)
 {
@@ -142,7 +169,7 @@ int main(int argc, char *argv[]) {
   GtkWidget *window;
   GtkWidget *table,hbox;
   GtkWidget *button1,*button2,*button3,*button4,*button5,*button6,*button7,*button8,*button9,*button10;
-  GtkWidget *button11,*button12,*button13,*button14,*button15;
+  GtkWidget *button11,*button12,*button13,*button14,*button15,*button16,*button17,*button18;
 
   //초기화 설정
   gtk_init(&argc, &argv);
@@ -176,6 +203,9 @@ int main(int argc, char *argv[]) {
   button13 = gtk_button_new_with_label("sketch");
   button14 = gtk_button_new_with_label("x-axis mirror");
   button15 = gtk_button_new_with_label("y-axis mirror");
+  button16 = gtk_button_new_with_label("Polaroid");
+  button17 = gtk_button_new_with_label("Swirl");
+  button18 = gtk_button_new_with_label("Wave");
 
   //버튼 이벤트 연결
   g_signal_connect(G_OBJECT(button1),"clicked",
@@ -208,6 +238,13 @@ int main(int argc, char *argv[]) {
                 G_CALLBACK(Flip),GTK_IMAGE(image));
   g_signal_connect(G_OBJECT(button15),"clicked",
                 G_CALLBACK(Flop),GTK_IMAGE(image));
+  g_signal_connect(G_OBJECT(button16),"clicked",
+                G_CALLBACK(Polar),GTK_IMAGE(image));
+  g_signal_connect(G_OBJECT(button17),"clicked",
+                G_CALLBACK(Swirl),GTK_IMAGE(image));
+  g_signal_connect(G_OBJECT(button18),"clicked",
+                G_CALLBACK(Wave),GTK_IMAGE(image));
+
   gtk_widget_set_size_request(image,600,500);
   //테이블에 위젯 추가
   gtk_table_attach_defaults(GTK_TABLE(table),button1,0,1,0,1);
@@ -225,6 +262,9 @@ int main(int argc, char *argv[]) {
   gtk_table_attach_defaults(GTK_TABLE(table),button13,6,7,3,4);
   gtk_table_attach_defaults(GTK_TABLE(table),button14,4,5,6,7);
   gtk_table_attach_defaults(GTK_TABLE(table),button15,5,6,6,7);
+  gtk_table_attach_defaults(GTK_TABLE(table),button16,6,7,4,5);
+  gtk_table_attach_defaults(GTK_TABLE(table),button17,6,7,5,6);
+  gtk_table_attach_defaults(GTK_TABLE(table),button18,6,7,6,7);
   gtk_table_attach_defaults(GTK_TABLE(table),image,1,6,0,6);
 
   //윈도우에 테이블 추가

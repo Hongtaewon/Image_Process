@@ -3,16 +3,32 @@ void main()
 {
 	MagickWand *mw = NULL;
 	PixelWand *background;
+	DrawingWand *dw;
 	MagickWandGenesis();
 
 	/* Create a wand */
 	mw = NewMagickWand();
 	background = NewPixelWand();
-	PixelSetColor(background,"#ffffff");
+	dw = NewDrawingWand();
+	PixelSetColor(background,"#000fff");
 	/* Read the input image */
 	MagickReadImage(mw,"dog.png");
 	/* write it */
-	MagickFlopImage(mw);
+	MagickWaveImage(mw,2,30);
+	//MagickSwirlImage(mw,90);
+	//MagickStripImage(mw);
+	//MagickShearImage(mw,background,20,20);
+	//MagickSetImageFuzz(mw,2);
+	//MagickSetImageGravity(mw,PartitionInterlace);
+	//MagickSetImageBorderColor(mw,background);
+	//MagickPolaroidImage(mw,dw,30);
+	//MagickMagnifyImage(mw);
+	//MagickEdgeImage(mw,5);
+	//MagickCoalesceImages(mw);
+	//MagickClampImage(mw);
+	//MagickChopImage(mw,11,11,11,11);
+	//MagickCharcoalImage(mw,0,10);
+	//MagickFlopImage(mw);
 	//MagickFlipImage(mw);
 	//MagickSpliceImage(mw,3,3,1,1);
 	//MagickOilPaintImage(mw,3);
